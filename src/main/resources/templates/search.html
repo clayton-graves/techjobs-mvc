@@ -38,6 +38,20 @@
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
 
+    <!-- Semi successful but displays all key value sets on one row.    -->
+
+    <div th:fragment="display-results">
+
+    <h3 th:text="${itemcount !=null} ? ${itemcount} + ' Result(s)'"></h3>
+    <table class="job-listing" th:each="map : ${query}">
+        <tr th:each="mapEntry : ${map}">
+            <td th:text="${#strings.capitalizeWords(mapEntry.key)}"></td>
+            <td th:text="${mapEntry.value}"></td>
+        </tr>
+    </table>
+    </div>
+
+    <!--    <h3 th:text="${itemcount} + ' Result(s)'"></h3>     -->
 </div>
 
 </body>

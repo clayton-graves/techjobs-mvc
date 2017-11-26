@@ -39,8 +39,10 @@ public class ListController {
 
         if (column.equals("all")) {
             ArrayList<HashMap<String, String>> jobs = JobData.findAll();
+            int itemcount = jobs.size();
             model.addAttribute("title", "All Jobs");
-            model.addAttribute("jobs", jobs);
+            model.addAttribute("query", jobs);
+            model.addAttribute("itemcount", itemcount);
             return "list-jobs";
         } else {
             ArrayList<String> items = JobData.findAll(column);
@@ -57,8 +59,11 @@ public class ListController {
             @RequestParam String column, @RequestParam String value) {
 
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(column, value);
+        ArrayList<HashMap<String, String>> query = JobData.findByColumnAndValue(column, value);
+        int itemcount = query.size();
         model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
-        model.addAttribute("jobs", jobs);
+        model.addAttribute("itemcount", itemcount);
+        model.addAttribute("query", query);
 
         return "list-jobs";
     }
